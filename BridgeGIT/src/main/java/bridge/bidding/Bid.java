@@ -12,7 +12,12 @@ import bridge.core.deck.NoTrump;
 import bridge.core.deck.Spades;
 import bridge.core.deck.Trump;
 
-
+/**
+ * 
+ * @author pah
+ * 
+ * This class represents the typ eof bid that can be called
+ */
 public class Bid {
 	public static Bid PASS = new Pass();
 	public static Bid DOUBLE = new Double();
@@ -72,59 +77,67 @@ public class Bid {
 	}
 
 	/**
-	 * @param
-	 * @return
+	 * Determines is this bid has greater bid value than  other bid
+	 * 
+	 * @param otherBid the other bid to be compared with
+	 * @return True if this bid is greater than other bid
 	 */
-	public boolean greaterThan(Bid other) {
-		if (other == null) {
+	public boolean greaterThan(Bid otherBid) {
+		if (otherBid == null) {
 			return true;
 		}
 		if (this.equals(new Pass())) {
 			return false;
 		}
-		if (new Pass().equals(other)) {
+		if (new Pass().equals(otherBid)) {
 			return true;
 		}
-		if (getValue() > other.getValue()) {
+		if (getValue() > otherBid.getValue()) {
 			return true;
-		} else if (getValue() < other.getValue()) {
+		} else if (getValue() < otherBid.getValue()) {
 			return false;
 		} else {
-			return isColorGreater(other);
+			return isColorGreater(otherBid);
 		}
 	}
 
 	/**
-	 * @param
+	 * In bridge trumps in increasing order are  
+	 * Clubs, diamonds,hearts and spades
+	 * 
+	 * method returns true if thisBid  card suit (color) is
+	 * greater than otherBid
+	 * 
+	 * @param 
 	 * @return
 	 */
-	private boolean isColorGreater(Bid other) {
+	private boolean isColorGreater(Bid otherBid) {
 		if (Clubs.i().equals(trump)) {
 			return false;
 		}
 		if (trump.equals(Diamonds.i())) {
-			if (other.getTrump().equals(Clubs.i())) {
+			if (otherBid.getTrump().equals(Clubs.i())) {
 				return true;
 			} else {
 				return false;
 			}
 		}
 		if (trump.equals(Hearts.i())) {
-			if (other.getTrump().equals(Clubs.i()) || other.getTrump().equals(Diamonds.i())) {
+			if (otherBid.getTrump().equals(Clubs.i()) || otherBid.getTrump().equals(Diamonds.i())) {
 				return true;
 			} else {
 				return false;
 			}
 		}
 		if (trump.equals(Spades.i())) {
-			if (other.getTrump().equals(Clubs.i()) || other.getTrump().equals(Diamonds.i())
-					|| other.getTrump().equals(Hearts.i())) {
+			if (otherBid.getTrump().equals(Clubs.i()) || otherBid.getTrump().equals(Diamonds.i())
+					|| otherBid.getTrump().equals(Hearts.i())) {
 				return true;
 			} else {
 				return false;
 			}
 		}
-		if (!NoTrump.i().equals(other.getTrump())) {
+		if (!NoTrump.i().equals(otherBid.getTrump())) {
 			return true;
 		} else {
 			return false;
@@ -132,22 +145,27 @@ public class Bid {
 	}
 
 	/**
-	 * @param
+	 * Make a bid (call) 
+	 * 
+	 * @param bidSize the levelof the bid (1-7)
+	 * @param trump (clubs,diamonds,hearts, spades of NT, pass or double)
 	 * @return
 	 */
-	public static Bid makeBid(int bidSize, String t) {
-		if (Pass.stringValue().equals(t.toUpperCase())) {
+	public static Bid makeBid(int bidSize, String trump) {
+		if (Pass.stringValue().equals(trump.toUpperCase())) {
 			return new Pass();
 
-		} else if (Double.stringValue().equals(t.toUpperCase())) {
+		} else if (Double.stringValue().equals(trump.toUpperCase())) {
 			return new Double();
 		}
-		return new Bid(bidSize, Trump.instance(t));
+		return new Bid(bidSize, Trump.instance(trump));
 	}
 
 	/**
-	 * @param
-	 * @return
+	 * Verifies this bid is a pass call
+	 * 
+	 * @param NONE
+	 * @return True if bid is a pass call
 	 */
 	public boolean isPass() {
 		return PASS.equals(this);
