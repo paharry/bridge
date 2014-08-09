@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: test.java.gnubridge.core.bidding.rules.RebidTest
+-------------------------------------------------------------------------------
+Tests run: 12, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.024 sec - in test.java.gnubridge.core.bidding.rules.RebidTest
