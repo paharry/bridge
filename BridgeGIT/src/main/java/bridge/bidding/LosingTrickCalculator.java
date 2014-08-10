@@ -8,7 +8,6 @@ import java.util.List;
 import bridge.core.Card;
 import bridge.core.Hand;
 import bridge.core.deck.Ace;
-import bridge.core.deck.Jack;
 import bridge.core.deck.King;
 import bridge.core.deck.Queen;
 import bridge.core.deck.Suit;
